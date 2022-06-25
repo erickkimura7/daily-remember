@@ -2,7 +2,6 @@ package notificationevent
 
 import (
 	"errors"
-	"time"
 
 	"github.com/google/uuid"
 )
@@ -30,14 +29,9 @@ func (n *notificationService) AddNotification(model *Event) error {
 		return err
 	}
 
-	n.notificationRepo.AddEvent(&Event{
-		ID:          uuid.String(),
-		Title:       "Teste Title",
-		Description: "Teste Description",
-		DateTime:    time.Now(),
-		CreatedAt:   time.Now(),
-		UpdatedAt:   time.Now(),
-	})
+	model.ID = uuid.String()
+
+	n.notificationRepo.AddEvent(model)
 
 	return nil
 }
@@ -50,4 +44,10 @@ func (n *notificationService) ListAllNotifications() ([]*Event, error) {
 	}
 
 	return allEvents, nil
+}
+
+func (n *notificationService) RemoveNotification(id string) error {
+	err := n.notificationRepo.RemoveEventById(id)
+
+	return err
 }

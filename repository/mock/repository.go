@@ -1,6 +1,8 @@
 package mockrepository
 
 import (
+	"errors"
+
 	nt "github.com/erickkimura7/daily-remember/notificationEvent"
 )
 
@@ -35,4 +37,15 @@ func (m *mockRepository) FindEventById(id string) (*nt.Event, error) {
 
 func (m *mockRepository) FindAllEvents() ([]*nt.Event, error) {
 	return m.events, nil
+}
+
+func (m *mockRepository) RemoveEventById(id string) error {
+	for index, each := range m.events {
+		if string(each.ID) == id {
+			m.events = append(m.events[:index], m.events[index+1:]...)
+			return nil
+		}
+	}
+
+	return errors.New("id nao encontrado para ser removido")
 }

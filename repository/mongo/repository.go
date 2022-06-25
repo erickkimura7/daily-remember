@@ -55,3 +55,7 @@ func (m *mongoRepository) FindEventById(id string) (*nt.Event, error) {
 func (m *mongoRepository) FindAllEvents() ([]*nt.Event, error) {
 	return nil, nil
 }
+
+func (m *mongoRepository) RemoveEventById(id string) error {
+	return nil
+}

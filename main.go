@@ -8,6 +8,7 @@ import (
 	"syscall"
 
 	httphandler "github.com/erickkimura7/daily-remember/api/http"
+	"github.com/erickkimura7/daily-remember/jobscheduler"
 	notificationevent "github.com/erickkimura7/daily-remember/notificationEvent"
 	mockrepository "github.com/erickkimura7/daily-remember/repository/mock"
 	"github.com/gin-gonic/gin"
@@ -30,6 +31,10 @@ func main() {
 	r.GET("/", handler.GetAllNotification)
 
 	r.POST("/", handler.AddNotification)
+
+	r.DELETE("/:id", handler.RemoveNotification)
+
+	go jobscheduler.PoolJob()
 
 	errs := make(chan error, 2)
 

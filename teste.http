@@ -1,0 +1,26 @@
+POST http://localhost:8080/ HTTP/1.1
+content-type: application/json
+
+{
+	"title": "tt",
+	"description": "sadas",
+	"date_time": "",
+	"created_at": "",
+	"updated_at": ""
+}
+
+###
+
+GET http://localhost:8080/ HTTP/1.1
+content-type: application/json
+
+{
+}
+
+###
+
+DELETE http://localhost:8080/8453a95b-f443-11ec-b9a4-00fff4f6d875 HTTP/1.1
+content-type: application/json
+
+{
+}
