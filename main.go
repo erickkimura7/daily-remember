@@ -28,10 +28,9 @@ func main() {
 	handler := httphandler.NewHandler(notificacaoService)
 
 	r := gin.Default()
+
 	r.GET("/", handler.GetAllNotification)
-
 	r.POST("/", handler.AddNotification)
-
 	r.DELETE("/:id", handler.RemoveNotification)
 
 	go jobscheduler.PoolJob()
