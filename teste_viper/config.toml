@@ -1,0 +1,6 @@
+[config]
+teste="teste"
+
+[config.server]
+port="8090"
+url="localhost"

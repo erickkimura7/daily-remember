@@ -8,6 +8,7 @@ import (
 	"syscall"
 
 	httphandler "github.com/erickkimura7/daily-remember/api/http"
+	"github.com/erickkimura7/daily-remember/config"
 	"github.com/erickkimura7/daily-remember/jobscheduler"
 	notificationevent "github.com/erickkimura7/daily-remember/notificationEvent"
 	mockrepository "github.com/erickkimura7/daily-remember/repository/mock"
@@ -16,6 +17,11 @@ import (
 
 func main() {
 	// gin.SetMode(gin.ReleaseMode)
+	config, err := config.NewConfig("./")
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	repo, err := mockrepository.NewMockRepository()
 
@@ -38,8 +44,8 @@ func main() {
 	errs := make(chan error, 2)
 
 	go func() {
-		log.Println("Listening on port :8000")
-		err := r.Run() // listen and serve on 0.0.0.0:8080
+		log.Printf("Listening on port :%s\n", config.Server.Port)
+		err := r.Run(fmt.Sprintf(":%s", config.Server.Port))
 		errs <- err
 	}()
 
