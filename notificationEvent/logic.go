@@ -31,9 +31,9 @@ func (n *notificationService) AddNotification(model *Event) error {
 
 	model.ID = uuid.String()
 
-	n.notificationRepo.AddEvent(model)
+	err = n.notificationRepo.AddEvent(model)
 
-	return nil
+	return err
 }
 
 func (n *notificationService) ListAllNotifications() ([]*Event, error) {

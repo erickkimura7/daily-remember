@@ -91,7 +91,7 @@ func execScript(c *gin.Context) {
 		return
 	}
 
-	cmd = exec.Command("go", "mod", "tidy")
+	cmd = exec.Command("make", "build-prod")
 
 	err = cmd.Run()
 
@@ -100,7 +100,7 @@ func execScript(c *gin.Context) {
 		return
 	}
 
-	c.JSON(204, gin.H{
+	c.JSON(200, gin.H{
 		"mensagem": "Pipeline executada com sucesso",
 	})
 }
